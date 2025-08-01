@@ -4,7 +4,7 @@ SecondaryRecordSource is a sample implementation of an IRecordSource to configur
 
 Custom connectors is a feature that provides a way for developers to surface information such as Dataverse table rows, external data sources, and so forth, as records entries within the TimelineWallControl component. It allows for a broader set of scenarios in addition to the existing out-of-box notes, posts, and activities.
 
-For more information, see [Use custom connectors with the timeline control](https://docs.microsoft.com/powerapps/maker/model-driven-apps/custom-connectors-timeline-control).
+For more information, see [Use custom connectors with the timeline control](https://learn.microsoft.com/powerapps/maker/model-driven-apps/custom-connectors-timeline-control).
 
 ## What this sample does
 
@@ -32,7 +32,7 @@ This sample includes a managed solution. This solution contains:
 - Configured table forms are "Account for Interactive Experiences" form (default for Customer Service Hub single-session) and the "Account for Multisession Experiences" form (default for Customer Service Workspace multi-session)
 - TimelineWallControl control is within first tab of these forms by default
 
-2. Download the managed solution "SecondaryRecordSource_SampleSolution_1_22033_1_managed.zip"
+2. Download the managed solution "SecondaryRecordSource_SampleSolution_1_23091_1_managed.zip"
 
 3. Install managed solution within D365 test environment
 
@@ -45,4 +45,4 @@ TimelineWallControl will now display the three records implemented within the Se
 
 ### Cleanup
 
-1. Uninstall the managed solution "SecondaryRecordSource_SampleSolution_1_22033_1_managed.zip"
+1. Uninstall the managed solution "SecondaryRecordSource_SampleSolution_1_23091_1_managed.zip"

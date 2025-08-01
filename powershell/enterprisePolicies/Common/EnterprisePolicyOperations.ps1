@@ -1,6 +1,18 @@
-﻿function AzureLogin() {
+﻿function AzureLogin {
+    param(
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("tip1", "tip2", "prod", "usgovhigh", "dod", "china")]
+        [String]$endpoint
+    )    
 
-    $connect = Connect-AzAccount
+    $environment = "AzureCloud"
+    if (($endpoint -eq "usgovhigh") -or ($endpoint -eq "dod")) {
+        $environment = "AzureUSGovernment"
+    }
+    elseif ($endpoint -eq "china") {
+        $environment = "AzureChinaCloud"
+    }
+    $connect = Connect-AzAccount -Environment $environment
 
     if ($null -eq $connect)
     {
@@ -99,7 +111,7 @@ function RemoveEnterprisePolicy($policyArmId)
 
 }
 
-function GenerateEnterprisePolicyBody ($policyType, $policyLocation, $policyName, $keyVaultId, $keyName, $keyVersion, $vnetId, $subnetName)
+function GenerateEnterprisePolicyBody ($policyType, $policyLocation, $policyName, $keyVaultId, $keyName, $keyVersion, $primaryVnetId, $primarySubnetName, $secondaryVnetId, $secondarySubnetName)
 {   
     if ("cmk" -eq $policyType)
     {
@@ -141,6 +153,25 @@ function GenerateEnterprisePolicyBody ($policyType, $policyLocation, $policyName
     
     elseif ("vnet" -eq $policyType)
     {
+        $virtualNetworks = @(
+            @{
+                "id" = $primaryVnetId
+                "subnet" = @{
+                    "name" = $primarySubnetName
+                }
+            }
+        )
+
+        if ($null -ne $secondaryVnetId)
+        {
+            $virtualNetworks += @{
+                "id" = $secondaryVnetId
+                "subnet" = @{
+                    "name" = $secondarySubnetName
+                }
+            }
+        }
+
         $body = @{
             "`$schema" = "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#"
             "contentVersion" = "1.0.0.0"
@@ -152,21 +183,10 @@ function GenerateEnterprisePolicyBody ($policyType, $policyLocation, $policyName
                     "name" = $policyName
                     "location"= $policyLocation
                     "kind" = "NetworkInjection"
-                
-                    "identity" = @{
-                        "type"= "SystemAssigned"
-                    }
-                
+                               
                     "properties" = @{
                         "networkInjection" = @{
-                            "virtualNetworks" = @(
-                                @{
-                                    "id" = $vnetId
-                                    "subnet" = @{
-                                        "name" = $subnetName
-                                    }
-                                }
-                            )
+                            "virtualNetworks" = $virtualNetworks
                         }
                     }
                 }
@@ -175,10 +195,29 @@ function GenerateEnterprisePolicyBody ($policyType, $policyLocation, $policyName
         }
     }
 
+    elseif ("identity" -eq $policyType)
+    {
+        $body = @{
+            "`$schema" = "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#"
+            "contentVersion" = "1.0.0.0"
+            "parameters"= @{}
+            "resources" = @(
+                @{
+                    "type" = "Microsoft.PowerPlatform/enterprisePolicies"
+                    "apiVersion" = "2020-10-30"
+                    "name" = $policyName
+                    "location"= $policyLocation
+                    "kind" = "Identity"
+                
+                    "identity" = @{
+                        "type"= "SystemAssigned"
+                    }               
+                   
+                }
+            )
+            
+        }
+    }
+
    return $body
 }
-
-
-
-
-
