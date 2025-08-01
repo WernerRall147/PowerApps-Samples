@@ -14,7 +14,7 @@ See the `Get-Help .\opdg-check.ps1 -Detailed` for specific parameter information
   -sapCclDllPath c:\sapcryptolib\sapcrypto.dll
   -sapCclIniPath c:\sapcryptolib\sapcrypto.ini
 ```
-
+#TODO
 # Prerequisites
 1. Powershell (Run as Administrator)
 2. [Active Directory Remote Power Shell module](https://go.microsoft.com/fwlink/?linkid=2243545)

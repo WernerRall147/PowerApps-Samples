@@ -1,0 +1,11 @@
+{
+  "SubscriptionId": "903d847b-78e2-4a91-a151-7e2295a32f1d",
+  "VirtualNetworkName": "myVnet",
+  "SubnetName": "mySubnet", 
+  "ResourceGroupName": "myResourceGroup",
+  "EnterprisePolicyName": "myEnterprisePolicy",
+  "PrimaryRegion": "East US",
+  "SecondaryRegion": "West US",
+  "ResourcePrefix": "ppvnet",
+  "EnvironmentId": ""
+}

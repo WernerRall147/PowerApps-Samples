@@ -1,0 +1,14 @@
+{
+  "SubscriptionId": "903d847b-78e2-4a91-a151-7e2295a32f1d",
+  "EnvironmentId": "2259255b-2cd5-e956-80dc-2d280958444b",
+  "ResourceGroupName": "PowerPlatformVNETInjection",
+  "EnterprisePolicyName": "PowerPlatformVNetPolicy",
+  "PrimaryRegion": "westeurope",
+  "SecondaryRegion": "northeurope",
+  "GeoLocation": "europe",
+  "VNetAddressSpace": "10.0.0.0/16",
+  "PrimarySubnetCIDR": "10.0.1.0/24",
+  "SecondarySubnetCIDR": "10.0.2.0/24",
+  "CreateNATGateways": true,
+  "ValidateOnly": false
+}
