@@ -52,7 +52,7 @@ param(
     [string]$ConfigFile = "",
     
     [Parameter(Mandatory = $false)]
-    [string]$VirtualNetworkSubscriptionId = "903d847b-78e2-4a91-a151-7e2295a32f1d",
+    [string]$VirtualNetworkSubscriptionId = "#TODO",
     
     [Parameter(Mandatory = $false)]
     [string]$VirtualNetworkName = "myVnet",
